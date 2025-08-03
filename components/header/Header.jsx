@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import './Header.css';
 import runHeaderAnimations from '../animations/header';
+import Link from 'next/link';
 
 const Header = () => {
   useEffect(() => {
@@ -35,17 +36,27 @@ const Header = () => {
             <div className="menu-content-wrapper">
               <div className="menu-content-main">
                 <div className="menu-col">
-                  <div className="menu-link"><a className='links' href="#">Index</a></div>
-                  <div className="menu-link"><a className='links' href="#">Portfolio</a></div>
-                  <div className="menu-link"><a className='links' href="#">Studio</a></div>
-                  <div className="menu-link"><a className='links' href="#">Journal</a></div>
-                  <div className="menu-link"><a className='links' href="#">Connect</a></div>
+                  <div className="menu-link">
+                    <Link className="links" href="/">Home</Link>
+                  </div>
+                  <div className="menu-link">
+                    <Link className="links" href="/resources/books/page.jsx">Books</Link>
+                  </div>
+                  <div className="menu-link">
+                    <Link className="links" href="/resources/articles/page.jsx">Articles</Link>
+                  </div>
+                  <div className="menu-link">
+                    <Link className="links" href="/resources/videos/page.jsx">Videos</Link>
+                  </div>
+                  <div className="menu-link">
+                    <Link className="links" href="/contact">Contact Us</Link>
+                  </div>
                 </div>
 
                 <div className="menu-col">
-                  <div className="menu-tag"><a className='links' href="#">Web Animations</a></div>
-                  <div className="menu-tag"><a className='links' href="#">Interactive Media</a></div>
-                  <div className="menu-tag"><a className='links' href="#">Motion Craft</a></div>
+                  <div className="menu-tag"><Link className='links' href="#">Web Animations</Link></div>
+                  <div className="menu-tag"><Link className='links' href="#">Interactive Media</Link></div>
+                  <div className="menu-tag"><Link className='links' href="#">Motion Craft</Link></div>
                 </div>
               </div>
               <div className="menu-footer">

@@ -26,6 +26,12 @@ const AboutUs = () => {
       rotation: 45
     });
 
+    // Set initial color for highlight words to black
+    window.gsap.set(highlightWordsRef.current, {
+      color: "#374151", // gray-700 equivalent
+      textShadow: "none"
+    });
+
     // Animate title with a typewriter effect
     tl.to(titleRef.current, {
       opacity: 1,
@@ -56,15 +62,25 @@ const AboutUs = () => {
       stagger: 0.1
     }, "-=0.8");
 
-    // Highlight key words animation
-    const highlightTl = window.gsap.timeline({ repeat: -1, yoyo: true, delay: 2 });
+    // Highlight key words animation - fixed to loop properly
+    const highlightTl = window.gsap.timeline({ repeat: -1, delay: 2 });
+    
+    // Animate from black to highlight color
     highlightTl.to(highlightWordsRef.current, {
       color: "#EAA64D",
-      textShadow: "0 0 10px rgba(16, 185, 129, 0.3)",
+      textShadow: "0 0 10px rgba(234, 166, 77, 0.3)",
       duration: 2,
       ease: "power2.inOut",
-      stagger: 0.3
-    });
+      stagger: 0.3,
+    })
+    // Animate back to black
+    .to(highlightWordsRef.current, {
+      color: "#374151", // gray-700
+      textShadow: "none",
+      duration: 2,
+      ease: "power2.inOut",
+      stagger: 0.3,
+    }, "+=0.5");
 
     // Floating animation for logo
     window.gsap.to(logoRef.current, {
@@ -90,16 +106,16 @@ const AboutUs = () => {
   };
 
   return (
-    <div className='relative flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden'>
+    <div className='pt-20 relative flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden'>
       {/* Decorative background elements */}
       <div className='absolute inset-0 overflow-hidden'>
         <div 
           ref={el => addToRefs(el, decorativeElementsRef)}
-          className='absolute top-20 left-20 w-32 h-32 bg-emerald-200 rounded-full opacity-20'
+          className='hidden sm:block absolute top-20 left-20 w-32 h-32 bg-emerald-200 rounded-full opacity-20'
         ></div>
         <div 
           ref={el => addToRefs(el, decorativeElementsRef)}
-          className='absolute top-40 right-32 w-24 h-24 bg-blue-200 rounded-full opacity-20'
+          className='hidden sm:block absolute top-40 right-32 w-24 h-24 bg-blue-200 rounded-full opacity-20'
         ></div>
         <div 
           ref={el => addToRefs(el, decorativeElementsRef)}
@@ -111,7 +127,7 @@ const AboutUs = () => {
         ></div>
       </div>
 
-      <div ref={containerRef} className='relative z-10 flex flex-col lg:flex-row items-center justify-center gap-12 px-8 max-w-6xl mx-auto'>
+      <div ref={containerRef} className='relative z-10 flex flex-col xl:flex-row items-center justify-around gap-12 px-8 w-full lg:mx-[200px]'>
         
         {/* Mission Content */}
         <div className='flex-1 text-center lg:text-left max-w-2xl'>
