@@ -7,7 +7,11 @@ import Link from 'next/link';
 
 const Header = () => {
   useEffect(() => {
-    runHeaderAnimations();
+    // Ensure code runs after DOM is ready
+    const id = requestAnimationFrame(() => {
+      runHeaderAnimations();
+    });
+    return () => cancelAnimationFrame(id);
   }, []);
 
   return (
@@ -15,11 +19,11 @@ const Header = () => {
       <nav>
         <div className="menu-bar">
           <div className="menu-logo">
-            <a className='links' href="#"><img className="image" src="/btn.png" alt="logo" /></a>
+            <a className='links' href="/"><img className="image" src="/logoB.png" alt="logo" /></a>
           </div>
           <div className="menu-toggle-btn">
             <div className="menu-toggle-label">
-              <p className='paragraph'>Menu</p>
+              <p className='paragraph-icon'>Menu</p>
             </div>
             <div className="menu-hamburger-icon">
               <span></span>
@@ -40,16 +44,16 @@ const Header = () => {
                     <Link className="links" href="/">Home</Link>
                   </div>
                   <div className="menu-link">
-                    <Link className="links" href="/resources/books/page.jsx">Books</Link>
+                    <Link className="links" href="/pages/books/">Books</Link>
                   </div>
                   <div className="menu-link">
-                    <Link className="links" href="/resources/articles/page.jsx">Articles</Link>
+                    <Link className="links" href="/pages/articles/">Articles</Link>
                   </div>
                   <div className="menu-link">
-                    <Link className="links" href="/resources/videos/page.jsx">Videos</Link>
+                    <Link className="links" href="/pages/videos/">Videos</Link>
                   </div>
                   <div className="menu-link">
-                    <Link className="links" href="/contact">Contact Us</Link>
+                    <Link className="links" href="/pages/contact">Contact Us</Link>
                   </div>
                 </div>
 

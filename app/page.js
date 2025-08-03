@@ -1,7 +1,7 @@
 import Header from "@/components/header/Header";
-import AboutUs from "@/pages/LandingPage/AboutUs";
-import Hero from "@/pages/LandingPage/Hero";
-import KnowledgeResources from "@/pages/LandingPage/KnowledgeResources";
+import AboutUs from "@/components/LandingPage/AboutUs";
+import Hero from "@/components/LandingPage/Hero";
+import KnowledgeResources from "@/components/LandingPage/KnowledgeResources";
 
 
 export default function Home() {
