@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Globe, User, MessageSquare } from 'lucide-react';
-import Header from "@/components/header/Header";
+import Header from "/components/header/Header";
 
 const ContactPage = () => {
   const headerRef = useRef(null);

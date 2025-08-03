@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, Search, Filter, Clock, Calendar, User, ArrowRight, Tag } from 'lucide-react';
 import Link from 'next/link';
-import Header from "@/components/header/Header";
+import Header from "/components/header/Header";
 
 const ArticlesPage = () => {
   const headerRef = useRef(null);

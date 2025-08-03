@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FileText, Download, Search, Filter, BookOpen, User, Calendar } from 'lucide-react';
-import Header from "@/components/header/Header";
+import Header from "/components/header/Header";
 
 const BooksPage = () => {
   const headerRef = useRef(null);

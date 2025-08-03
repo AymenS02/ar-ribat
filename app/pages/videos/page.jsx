@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, Search, Filter, Clock, Eye, Calendar, Youtube } from 'lucide-react';
-import Header from "@/components/header/Header";
+import Header from "/components/header/Header";
 
 const VideosPage = () => {
   const headerRef = useRef(null);
