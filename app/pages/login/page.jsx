@@ -1,6 +1,6 @@
 // app/login/page.jsx
-'use client';
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from "/components/header/Header";
 
@@ -11,8 +11,8 @@ export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Check for success message from registration
-  useState(() => {
+  // ✅ Correct: useEffect to run after mount
+  useEffect(() => {
     const message = searchParams.get('message');
     if (message) {
       setSuccess(message);
@@ -33,12 +33,10 @@ export default function Page() {
 
     try {
       console.log('Attempting login for:', data.email);
-      
+
       const response = await fetch('/api/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
@@ -46,12 +44,9 @@ export default function Page() {
 
       if (response.ok) {
         setSuccess('Login successful! Redirecting...');
-        
-        // Store user data in localStorage or session
         localStorage.setItem('user', JSON.stringify(result.user));
-        
         setTimeout(() => {
-          router.push('/pages/dashboard'); // or wherever you want to redirect
+          router.push('/pages/dashboard');
         }, 1500);
       } else {
         setError(result.error || 'Login failed');
