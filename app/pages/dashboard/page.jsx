@@ -37,7 +37,7 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    router.push('/login');
+    router.push('/pages/login');
   };
 
   if (!user) {
