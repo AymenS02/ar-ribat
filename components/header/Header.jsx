@@ -58,9 +58,9 @@ const Header = () => {
                 </div>
 
                 <div className="menu-col">
-                  <div className="menu-tag"><Link className='links' href="#">Web Animations</Link></div>
+                  {/* <div className="menu-tag"><Link className='links' href="#">Web Animations</Link></div>
                   <div className="menu-tag"><Link className='links' href="#">Interactive Media</Link></div>
-                  <div className="menu-tag"><Link className='links' href="#">Motion Craft</Link></div>
+                  <div className="menu-tag"><Link className='links' href="#">Motion Craft</Link></div> */}
                 </div>
               </div>
               <div className="menu-footer">

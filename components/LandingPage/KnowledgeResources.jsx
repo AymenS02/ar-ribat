@@ -11,54 +11,99 @@ const KnowledgeResources = () => {
   const ctaRef = useRef(null);
 
   useEffect(() => {
-    // GSAP Animation Timeline
-    const tl = window.gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        once: true
+    // Load GSAP and ScrollTrigger dynamically
+    const loadGSAP = async () => {
+      if (typeof window !== 'undefined' && !window.gsap) {
+        // Load GSAP first
+        const gsapScript = document.createElement('script');
+        gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+        
+        gsapScript.onload = () => {
+          // Load ScrollTrigger after GSAP
+          const scrollTriggerScript = document.createElement('script');
+          scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
+          
+          scrollTriggerScript.onload = () => {
+            window.gsap.registerPlugin(window.ScrollTrigger);
+            initAnimations();
+          };
+          
+          document.head.appendChild(scrollTriggerScript);
+        };
+        
+        document.head.appendChild(gsapScript);
+      } else if (window.gsap && window.ScrollTrigger) {
+        initAnimations();
+      } else if (window.gsap) {
+        // GSAP loaded but ScrollTrigger might not be
+        if (!window.ScrollTrigger) {
+          const scrollTriggerScript = document.createElement('script');
+          scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
+          scrollTriggerScript.onload = () => {
+            window.gsap.registerPlugin(window.ScrollTrigger);
+            initAnimations();
+          };
+          document.head.appendChild(scrollTriggerScript);
+        } else {
+          initAnimations();
+        }
       }
-    });
+    };
 
-    // Set initial states
-    window.gsap.set([titleRef.current, ctaRef.current], {
-      opacity: 0,
-      y: 50
-    });
+    const initAnimations = () => {
+      // GSAP Animation Timeline
+      const tl = window.gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          once: true
+        }
+      });
 
-    window.gsap.set(cardsRef.current, {
-      opacity: 0,
-      y: 100,
-      scale: 0.8
-    });
+      // Set initial states
+      window.gsap.set([titleRef.current, ctaRef.current], {
+        opacity: 0,
+        y: 50
+      });
 
-    // Animate title
-    tl.to(titleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power3.out"
-    })
-    // Animate cards with stagger
-    .to(cardsRef.current, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.8,
-      ease: "back.out(1.2)",
-      stagger: 0.15
-    }, "-=0.4")
-    // Animate CTA button
-    .to(ctaRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: "power3.out"
-    }, "-=0.3");
+      window.gsap.set(cardsRef.current, {
+        opacity: 0,
+        y: 100,
+        scale: 0.8
+      });
+
+      // Animate title
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      })
+      // Animate cards with stagger
+      .to(cardsRef.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.2)",
+        stagger: 0.15
+      }, "-=0.4")
+      // Animate CTA button
+      .to(ctaRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out"
+      }, "-=0.3");
+    };
+
+    loadGSAP();
 
     // Cleanup
     return () => {
-      tl.kill();
+      if (window.gsap) {
+        window.gsap.killTweensOf([titleRef.current, ctaRef.current, ...cardsRef.current]);
+      }
     };
   }, []);
 
@@ -182,10 +227,6 @@ const KnowledgeResources = () => {
           </Link>
         </div>
       </div>
-
-      {/* GSAP Script */}
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     </section>
   );
 };

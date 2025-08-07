@@ -19,7 +19,7 @@ export default function Dashboard() {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
     if (!userData) {
-      router.push('/login');
+      router.push('/pages/login');
       return;
     }
     
